@@ -24,6 +24,18 @@ class Battlefield:
         # battlefield = [["°" for row in range(board_size)] for column in range(board_size)]
         # print(battlefield)
 
+    def random_coord(self):
+        return randint(0, self.grid_size - 1)
+
+    def add_ship(self, x, y, type):
+        self.ships.append((x, y))
+        if self.type == "player":
+            self.battlefield[x][y] = "@"
+
+    
+
+    
+
 def input_size(kind):
     """
     Get the user input for the size of the grid.
@@ -69,8 +81,7 @@ def size_conversion(value):
         
 
 
-def random_coord(grid):
-    return randint(0, grid - 1)
+
 
 # def data_evaluation(type, data):
 #     if type == "grid" and data :
@@ -81,12 +92,17 @@ def random_coord(grid):
 # fleet = int(input('enter the size of your fleet (max.value = 7): \n'))
 
 
-def ship_placement():
-    ships = []
-    for ship in range(fleet):
-        ships.append((random_coord(grid),random_coord(grid)))
+def ship_placement(battlefield):
+    x = battlefield.random_coord()
+    y = battlefield.random_coord()
+    battlefield.add_ship(x, y, battlefield)
 
-    print(ships)
+    
+    # ships = []
+    # for ship in range(fleet):
+    #     ships.append((random_coord(grid),random_coord(grid)))
+
+    # print(ships)
 
 #def populate_board
 
@@ -108,6 +124,9 @@ def new_match():
     computer_battlefield = Battlefield(grid_size, fleet_size, "Computer", type="computer")
     player_battlefield = Battlefield(grid_size, fleet_size, player, type="player")
 
+    for ship in range(fleet_size):
+        ship_placement(player_battlefield)
+    
     player_battlefield.print()
 
 new_match()
