@@ -2,6 +2,26 @@ from random import randint
 
 scores = {"computer": 0, "player": 0}
 
+class Battlefield:
+    """
+    Sets the size for the battle field and the size of the fleet,
+    the name for the players, the type of player.
+    It has methods for adding ships, for guesses and for printing the battle-field
+    """
+    def __init__(self,grid_size, fleet_size, name, type):
+        self.grid_size = grid_size
+        #self.battlefield = [["°" for row in range(grid_size)] for column in range(grid_size)]
+        self.fleet_size = fleet_size
+        self.name = name
+        self.type = type
+        self.guesses = []
+        self.ships = []
+
+    def print(self):
+        board_size = size_conversion(self.grid_size)
+        battlefield = [["°" for row in range(board_size)] for column in range(board_size)]
+        print(battlefield)
+
 def input_size(kind):
     """
     Get the user input for the size of the grid.
@@ -29,6 +49,21 @@ def validate_data(values):
         return False
 
     return True
+
+def size_conversion(value):
+    """
+    Convert the string value into fixed integer value
+    """
+    real_size = 0
+    if value == "s":
+        real_size = 3
+    elif value == "m":
+        real_size = 5
+    elif value == "l":
+        real_size = 7
+    
+    return real_size
+        
 
 
 def random_coord(grid):
@@ -64,7 +99,10 @@ def new_match():
     print(">"*20 + "<"*20)
     grid_size = input_size("grid")
     fleet_size = input_size("fleet")
-    print(grid_size)
-    print(fleet_size)
+    
+    computer_battlefield = Battlefield(grid_size, fleet_size, "Computer", type="computer")
+    player_battlefield = Battlefield(grid_size, fleet_size, player, type="player")
+
+    player_battlefield.print()
 
 new_match()
