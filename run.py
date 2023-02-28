@@ -20,6 +20,8 @@ class Battlefield:
     def print(self):
         for row in self.battlefield:
             print(" ".join(row))
+        print(self.ships)
+        print(self.guesses)
         # board_size = size_conversion(self.grid_size)
         # battlefield = [["°" for row in range(board_size)] for column in range(board_size)]
         # print(battlefield)
@@ -31,6 +33,8 @@ class Battlefield:
         self.ships.append((x, y))
         if self.type == "player":
             self.battlefield[x][y] = "@"
+        # elif self.type == "computer":
+        #     self.battlefield[x][y] = "#"
 
     
 
@@ -93,6 +97,12 @@ def size_conversion(value):
 
 
 def ship_placement(battlefield):
+    """
+    This function calls the Class function random_coord
+    that generates random coordinates for x and y.
+    At the end calls the add_ship class function that adds
+    the coordinates to the ships list of the class
+    """
     x = battlefield.random_coord()
     y = battlefield.random_coord()
     battlefield.add_ship(x, y, battlefield)
@@ -105,6 +115,12 @@ def ship_placement(battlefield):
     # print(ships)
 
 #def populate_board
+
+def play_game(computer_battlefield, player_battlefield):
+    print(f"{player_battlefield.name}'s battlefield")
+    player_battlefield.print()
+    print(f"{computer_battlefield.name}'s battlefield")
+    computer_battlefield.print()
 
 def new_match():
     """
@@ -126,7 +142,8 @@ def new_match():
 
     for ship in range(fleet_size):
         ship_placement(player_battlefield)
+        ship_placement(computer_battlefield)
     
-    player_battlefield.print()
+    play_game(computer_battlefield, player_battlefield)
 
 new_match()
