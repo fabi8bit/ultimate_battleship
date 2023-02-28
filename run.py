@@ -33,8 +33,23 @@ class Battlefield:
         self.ships.append((x, y))
         if self.type == "player":
             self.battlefield[x][y] = "@"
-        # elif self.type == "computer":
-        #     self.battlefield[x][y] = "#"
+        elif self.type == "computer":
+            self.battlefield[x][y] = "#"
+
+    def guess(self,x,y):
+        self.guesses.append((x,y))
+        self.battlefield[x][y] = "X"
+        
+        
+        if (x,y) in self.ships:
+            self.battlefield[x][y] = "*"
+            return "Hit"
+            
+        else:
+            return "Miss"
+            
+            
+        
 
     
 
@@ -96,15 +111,23 @@ def size_conversion(value):
 # fleet = int(input('enter the size of your fleet (max.value = 7): \n'))
 
 
-def ship_placement(battlefield):
+def x_y_gen(battlefield):
     """
     This function calls the Class function random_coord
     that generates random coordinates for x and y.
-    At the end calls the add_ship class function that adds
-    the coordinates to the ships list of the class
     """
     x = battlefield.random_coord()
     y = battlefield.random_coord()
+    return x,y
+
+def ship_placement(battlefield):
+    """
+    This function unpack the coordinates coming from
+    x_y_gen function
+    At the end calls the add_ship class function that adds
+    the coordinates to the ships list of the class
+    """
+    x,y = x_y_gen(battlefield)
     battlefield.add_ship(x, y, battlefield)
 
     
@@ -114,13 +137,36 @@ def ship_placement(battlefield):
 
     # print(ships)
 
-#def populate_board
+def make_guess(player):
+    """
+    This function check if the player is the computer or the user.
+    If it's the computer call the random coordinates generator.
+    If it's the user asks to input the coordinates.
+    """
+    if player.name != "Computer":
+        # player = player_battlefield
+        x,y = x_y_gen(player)
+    else:
+        # player = "computer_battlefield"
+        x = int(input('Guess a row: \n'))
+        y = int(input('Guess a column: \n'))
+    return player.guess(x,y)
+    
 
 def play_game(computer_battlefield, player_battlefield):
     print(f"{player_battlefield.name}'s battlefield")
     player_battlefield.print()
     print(f"{computer_battlefield.name}'s battlefield")
     computer_battlefield.print()
+    computer_guess = make_guess(player_battlefield)
+    player_guess = make_guess(computer_battlefield)
+
+    print(computer_guess)
+    print(player_guess)
+    
+
+
+
 
 def new_match():
     """
