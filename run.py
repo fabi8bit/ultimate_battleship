@@ -10,7 +10,7 @@ class Battlefield:
     """
     def __init__(self,grid_size, fleet_size, name, type):
         self.grid_size = grid_size
-        #self.battlefield = [["°" for row in range(grid_size)] for column in range(grid_size)]
+        self.battlefield = [["°" for row in range(grid_size)] for column in range(grid_size)]
         self.fleet_size = fleet_size
         self.name = name
         self.type = type
@@ -18,9 +18,11 @@ class Battlefield:
         self.ships = []
 
     def print(self):
-        board_size = size_conversion(self.grid_size)
-        battlefield = [["°" for row in range(board_size)] for column in range(board_size)]
-        print(battlefield)
+        for row in self.battlefield:
+            print(" ".join(row))
+        # board_size = size_conversion(self.grid_size)
+        # battlefield = [["°" for row in range(board_size)] for column in range(board_size)]
+        # print(battlefield)
 
 def input_size(kind):
     """
@@ -33,7 +35,8 @@ def input_size(kind):
         size = input(f'enter the size of your {kind} (small = s, medium = m, large = l ): \n')
         if validate_data(size):
             break
-    return size
+    real_size = size_conversion(size)
+    return real_size
 
 def validate_data(values):
     """
@@ -84,6 +87,8 @@ def ship_placement():
         ships.append((random_coord(grid),random_coord(grid)))
 
     print(ships)
+
+#def populate_board
 
 def new_match():
     """
