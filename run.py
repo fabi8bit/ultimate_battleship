@@ -84,10 +84,20 @@ def validate_coord(x, y, player):
         if not (all([isinstance(item, int) for item in t])): # hint taken from this post https://datascienceparichay.com/article/python-check-tuple-contains-only-numbers/
             raise ValueError(
                 f'enter only integer from 0 to {player.grid_size}')
+        elif (int(x), int(y)) in player.guesses:
+            raise ValueError(
+                f"You can't guess the same coordinates twice!"
+            )
     except ValueError as e:
         print(f'Invalid data: {e}, please try again\n')
         return False
     return True
+
+
+def check_new_coord():
+    """
+    Check if the coordinate was already choosen
+    """
 
 
 def size_conversion(value):
@@ -154,6 +164,16 @@ def make_guess(player):
     return player.guess(int(x), int(y))
 
 
+def calculate_score(result, player):
+    """
+    This function gets two inputs: result (Hit or Miss), and the type of player (player or Computer)
+    and adds 1 to scores dictionary if it is a Hit
+    """
+    if result == "Hit":
+        scores[player.type] += 1
+    
+
+
 def play_game(computer_battlefield, player_battlefield):
     if (scores["computer"] != computer_battlefield.fleet_size) or (scores["player"] != player_battlefield.fleet_size):
         game = True
@@ -168,7 +188,12 @@ def play_game(computer_battlefield, player_battlefield):
         player_guess = make_guess(computer_battlefield)
         print(f'{player_battlefield.name} got a {player_guess}, guessing {computer_battlefield.guesses[-1]}')
         print(f'{computer_battlefield.name} got a {computer_guess}, guessing {player_battlefield.guesses[-1]}')
-
+        calculate_score(player_guess, player_battlefield)
+        calculate_score(computer_guess, computer_battlefield)
+        print('-'*40)
+        print('-'*40)
+        print('-'*16 + " SCORE " + "-"*16)
+        print(f"{player_battlefield.name}: {(scores['player'])}  ||  {computer_battlefield.name}: {(scores['computer'])}")
 
 def new_match():
     """
