@@ -179,13 +179,23 @@ def calculate_score(result, player):
         scores[player.type] += 1
     
 
+def end_game(computer_battlefield, player_battlefield):
+    if (scores["computer"] == computer_battlefield.fleet_size) or (scores["player"] == player_battlefield.fleet_size):
+        return True
+
+
+def winner(computer_battlefield, player_battlefield):
+    winner = max(scores)
+    if winner == "player":
+        winner = player_battlefield.name
+    else:
+        winner = computer_battlefield.name
+    return winner
+    
 
 def play_game(computer_battlefield, player_battlefield):
-    if (scores["computer"] != computer_battlefield.fleet_size) or (scores["player"] != player_battlefield.fleet_size):
-        game = True
-    else:
-        game = False
-    while game:
+    
+    while True:
         print(f"{player_battlefield.name}'s battlefield")
         player_battlefield.print()
         print(f"{computer_battlefield.name}'s battlefield")
@@ -200,8 +210,11 @@ def play_game(computer_battlefield, player_battlefield):
         print('-'*40)
         print('-'*16 + " SCORE " + "-"*16)
         print(f"{player_battlefield.name}: {(scores['player'])}  ||  {computer_battlefield.name}: {(scores['computer'])}")
-        print(player_battlefield.fleet_size)
-        print(game)
+        if end_game(computer_battlefield, player_battlefield):
+            break
+    print('-'*16 + " GAME OVER " + "-"*16)
+    winner_name = winner(computer_battlefield, player_battlefield)
+    print(f'The winner is {winner_name}')
 
 def new_match():
     """
