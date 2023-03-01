@@ -77,7 +77,8 @@ def validate_data(values):
 
 def validate_coord(x, y, player):
     """
-    Check if the coordinates are numeric and if are inthe correct range
+    Check if the coordinates are numeric and if are in the correct range,
+    and if it is enterd twice
     """
     try:
         t = (int(x), int(y))
@@ -89,6 +90,8 @@ def validate_coord(x, y, player):
                 f"You can't guess the same coordinates twice!"
             )
     except ValueError as e:
+        if player.type == "computer":
+            return False
         print(f'Invalid data: {e}, please try again\n')
         return False
     return True
@@ -151,12 +154,15 @@ def make_guess(player):
     If it's the computer call the random coordinates generator.
     If it's the user asks to input the coordinates.
     """
-    if player.name != "Computer":
-        # player = player_battlefield
-        x, y = x_y_gen(player)
-    else:
-        # player = "computer_battlefield"
-        while True:
+    while True:
+        if player.name != "Computer":
+            # player = player_battlefield
+            x, y = x_y_gen(player)
+            if validate_coord(x, y, player):
+                break
+        else:
+            # player = "computer_battlefield"
+            
             x = input('Guess a row: \n')
             y = input('Guess a column: \n')
             if validate_coord(x, y, player):
@@ -194,6 +200,8 @@ def play_game(computer_battlefield, player_battlefield):
         print('-'*40)
         print('-'*16 + " SCORE " + "-"*16)
         print(f"{player_battlefield.name}: {(scores['player'])}  ||  {computer_battlefield.name}: {(scores['computer'])}")
+        print(player_battlefield.fleet_size)
+        print(game)
 
 def new_match():
     """
