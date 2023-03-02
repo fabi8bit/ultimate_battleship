@@ -35,8 +35,8 @@ class Battlefield:
         self.ships.append((x, y))
         if self.type == "player":
             self.battlefield[x][y] = "@"
-        elif self.type == "computer":
-            self.battlefield[x][y] = "#"
+        # elif self.type == "computer":
+        #     self.battlefield[x][y] = "#"
 
     def guess(self, x, y):
         self.guesses.append((x, y))
@@ -208,6 +208,10 @@ def winner(computer_battlefield, player_battlefield):
     
 
 def play_game(computer_battlefield, player_battlefield):
+    """
+    Main loop of the program. It keeps the loop on until the player's score
+    or computer's score reach the number of ships deployed in the battlefield
+    """
     while True:
         print(f"{player_battlefield.name}'s battlefield")
         player_battlefield.print()
@@ -221,10 +225,6 @@ def play_game(computer_battlefield, player_battlefield):
         print(f'{computer_battlefield.name} got a {computer_guess}, guessing {player_battlefield.guesses[-1]}')
         calculate_score(player_guess, player_battlefield)
         calculate_score(computer_guess, computer_battlefield)
-
-        print(scores)
-        
-
         print('-'*40)
         print('')
         print('-'*40)
