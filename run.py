@@ -3,10 +3,9 @@ import os
 
 scores = {"computer": 0, "player": 0}
 
-
 class Battlefield:
     """
-    Sets the size for the battle field and the size of the fleet,
+    Main battlefield constructor. It sets the size for the battle field and the size of the fleet,
     the name for the players, the type of player.
     It has methods for adding ships, for guesses and for printing the battle-field
     """
@@ -22,11 +21,6 @@ class Battlefield:
     def print(self):
         for row in self.battlefield:
             print(" ".join(row))
-        # print(self.ships)
-        # print(self.guesses)
-        # board_size = size_conversion(self.grid_size)
-        # battlefield = [["°" for row in range(board_size)] for column in range(board_size)]
-        # print(battlefield)
 
     def random_coord(self):
         return randint(0, self.grid_size - 1)
@@ -55,7 +49,7 @@ def input_size(kind):
     """
 
     while True:
-        size = input(f'enter the size of your {kind} (small = s, medium = m, large = l ): \n')
+        size = input(f'enter the size of your {kind} (small (3)= s, medium (5)= m, large (7)= l ): \n')
         if validate_data(size):
             break
     real_size = size_conversion(size)
@@ -75,6 +69,7 @@ def validate_data(values):
         print(f'Invalid data: {e}, please try again\n')
         return False
     return True
+
 
 def validate_coord(x, y, player):
     """
@@ -120,10 +115,6 @@ def size_conversion(value):
         real_size = 7
     return real_size
 
-# def data_evaluation(type, data):
-#     if type == "grid" and data :
-# fleet = int(input('enter the size of your fleet (max.value = 7): \n'))
-
 
 def x_y_gen(battlefield):
     """
@@ -148,28 +139,20 @@ def ship_placement(battlefield):
             break
     battlefield.add_ship(x, y, battlefield)
 
-    # ships = []
-    # for ship in range(fleet):
-    #     ships.append((random_coord(grid),random_coord(grid)))
-
-    # print(ships)
-
 
 def make_guess(player):
     """
     This function check if the player is the computer or the user.
     If it's the computer call the random coordinates generator.
-    If it's the user asks to input the coordinates.
+    If it's the user asks to input the coordinates. It will proceed to
+    validate_coord to validate the input
     """
     while True:
         if player.name != "Computer":
-            # player = player_battlefield
             x, y = x_y_gen(player)
             if validate_coord(x, y, player):
                 break
         else:
-            # player = "computer_battlefield"
-            
             x = input('Guess a row: \n')
             y = input('Guess a column: \n')
             if validate_coord(x, y, player):
@@ -188,7 +171,7 @@ def calculate_score(result, player):
 
 def end_game(computer_battlefield, player_battlefield):
     '''
-    This function return True if one of the players hits all the ships
+    Returns True if one of the players hits all the ships
     '''
     if (scores["computer"] == computer_battlefield.fleet_size) or (scores["player"] == player_battlefield.fleet_size):
         return True
@@ -196,7 +179,7 @@ def end_game(computer_battlefield, player_battlefield):
 
 def winner(computer_battlefield, player_battlefield):
     '''
-    This function returns the name for the winner
+    Returns the name for the winner
     '''
     winner = max(scores, key=scores.get)
     
@@ -235,7 +218,6 @@ def play_game(computer_battlefield, player_battlefield):
         print('')
         if end_game(computer_battlefield, player_battlefield):
             break
-    # os.system('clear')
     print('')
     print('-'*13 + " GAME OVER " + "-"*13)
     print('')
@@ -256,13 +238,14 @@ def new_match():
     print(">"*20 + "<"*20)
     grid_size = input_size("grid")
     fleet_size = input_size("fleet")
-    
+
     computer_battlefield = Battlefield(grid_size, fleet_size, "Computer", type="computer")
     player_battlefield = Battlefield(grid_size, fleet_size, player, type="player")
 
     for ship in range(fleet_size):
         ship_placement(player_battlefield)
         ship_placement(computer_battlefield)
+    
     os.system('clear')
     play_game(computer_battlefield, player_battlefield)
 
