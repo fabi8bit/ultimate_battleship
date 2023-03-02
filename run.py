@@ -181,7 +181,7 @@ def winner(computer_battlefield, player_battlefield):
     '''
     Returns the name for the winner
     '''
-    winner = max(scores, key=scores.get)
+    winner = max(scores, key=scores.get) # Hint taken from this post https://datagy.io/python-get-dictionary-key-with-max-value/
     
     if winner == "player":
         winner = player_battlefield.name
