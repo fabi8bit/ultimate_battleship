@@ -1,4 +1,5 @@
 from random import randint
+import os
 
 scores = {"computer": 0, "player": 0}
 
@@ -34,8 +35,8 @@ class Battlefield:
         self.ships.append((x, y))
         if self.type == "player":
             self.battlefield[x][y] = "@"
-        # elif self.type == "computer":
-        #     self.battlefield[x][y] = "#"
+        elif self.type == "computer":
+            self.battlefield[x][y] = "#"
 
     def guess(self, x, y):
         self.guesses.append((x, y))
@@ -141,7 +142,10 @@ def ship_placement(battlefield):
     At the end calls the add_ship class function that adds
     the coordinates to the ships list of the class
     """
-    x, y = x_y_gen(battlefield)
+    while True:
+        x, y = x_y_gen(battlefield)
+        if (int(x), int(y)) not in battlefield.ships:
+            break
     battlefield.add_ship(x, y, battlefield)
 
     # ships = []
@@ -194,7 +198,8 @@ def winner(computer_battlefield, player_battlefield):
     '''
     This function returns the name for the winner
     '''
-    winner = max(scores)
+    winner = max(scores, key=scores.get)
+    
     if winner == "player":
         winner = player_battlefield.name
     else:
@@ -210,17 +215,30 @@ def play_game(computer_battlefield, player_battlefield):
         computer_battlefield.print()
         computer_guess = make_guess(player_battlefield)
         player_guess = make_guess(computer_battlefield)
+        os.system('clear')
+        print('-'*40)
         print(f'{player_battlefield.name} got a {player_guess}, guessing {computer_battlefield.guesses[-1]}')
         print(f'{computer_battlefield.name} got a {computer_guess}, guessing {player_battlefield.guesses[-1]}')
         calculate_score(player_guess, player_battlefield)
         calculate_score(computer_guess, computer_battlefield)
+
+        print(scores)
+        
+
         print('-'*40)
+        print('')
         print('-'*40)
-        print('-'*16 + " SCORE " + "-"*16)
+        print('')
+        print('-'*16 + " SCORE " + "-"*17)
         print(f"{player_battlefield.name}: {(scores['player'])}  ||  {computer_battlefield.name}: {(scores['computer'])}")
+        print('-'*40)
+        print('')
         if end_game(computer_battlefield, player_battlefield):
             break
-    print('-'*16 + " GAME OVER " + "-"*16)
+    # os.system('clear')
+    print('')
+    print('-'*13 + " GAME OVER " + "-"*13)
+    print('')
     winner_name = winner(computer_battlefield, player_battlefield)
     print(f'The winner is {winner_name}')
 
@@ -245,7 +263,7 @@ def new_match():
     for ship in range(fleet_size):
         ship_placement(player_battlefield)
         ship_placement(computer_battlefield)
-    
+    os.system('clear')
     play_game(computer_battlefield, player_battlefield)
 
 
