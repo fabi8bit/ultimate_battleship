@@ -88,10 +88,10 @@ def validate_coord(x, y, player):
         elif (int(x), int(y)) in player.guesses:
             raise ValueError(
                 f"You can't guess the same coordinates twice!")
-        # elif int(x) not in range(player.grid_size-1) \
-        #     or int(y) not in range(player.grid_size-1):
-        #     raise ValueError(
-        #         f'enter only integer from 0 to {player.grid_size-1}')
+        elif int(x) > player.grid_size-1 \
+            or int(y) > player.grid_size-1:
+            raise ValueError(
+                f'enter only integer from 0 to {player.grid_size-1}')
     except ValueError as e:
         if player.type == "player":
             return False
