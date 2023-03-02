@@ -49,7 +49,7 @@ def input_size(kind):
     """
 
     while True:
-        size = input(f'enter the size of your {kind} (small (3)= s, medium (5)= m, large (7)= l ): \n')
+        size = input(f'Enter the size of your {kind} (small (3)= s, medium (5)= m, large (7)= l ): \n')
         if validate_data(size):
             break
     real_size = size_conversion(size)
@@ -234,7 +234,10 @@ def new_match():
     print(">"*20 + "<"*20)
     print(">> Welcome to <<Ultimate Battleship>> <<")
     print(">"*20 + "<"*20)
-    player = input('enter your name: \n')
+    print('-'*40)
+    print('BEAR IN MIND: Top left corner is row: 0, col: 0')
+    print('-'*40)
+    player = input('Enter your name: \n')
     print(">"*20 + "<"*20)
     grid_size = input_size("grid")
     fleet_size = input_size("fleet")
