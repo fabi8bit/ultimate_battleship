@@ -34,8 +34,8 @@ class Battlefield:
         self.ships.append((x, y))
         if self.type == "player":
             self.battlefield[x][y] = "@"
-        elif self.type == "computer":
-            self.battlefield[x][y] = "#"
+        # elif self.type == "computer":
+        #     self.battlefield[x][y] = "#"
 
     def guess(self, x, y):
         self.guesses.append((x, y))
@@ -84,13 +84,16 @@ def validate_coord(x, y, player):
         t = (int(x), int(y))
         if not (all([isinstance(item, int) for item in t])): # hint taken from this post https://datascienceparichay.com/article/python-check-tuple-contains-only-numbers/
             raise ValueError(
-                f'enter only integer from 0 to {player.grid_size}')
+                f'enter only integer from 0 to {player.grid_size-1}')
         elif (int(x), int(y)) in player.guesses:
             raise ValueError(
-                f"You can't guess the same coordinates twice!"
-            )
+                f"You can't guess the same coordinates twice!")
+        # elif int(x) not in range(player.grid_size-1) \
+        #     or int(y) not in range(player.grid_size-1):
+        #     raise ValueError(
+        #         f'enter only integer from 0 to {player.grid_size-1}')
     except ValueError as e:
-        if player.type == "computer":
+        if player.type == "player":
             return False
         print(f'Invalid data: {e}, please try again\n')
         return False
@@ -180,11 +183,17 @@ def calculate_score(result, player):
     
 
 def end_game(computer_battlefield, player_battlefield):
+    '''
+    This function return True if one of the players hits all the ships
+    '''
     if (scores["computer"] == computer_battlefield.fleet_size) or (scores["player"] == player_battlefield.fleet_size):
         return True
 
 
 def winner(computer_battlefield, player_battlefield):
+    '''
+    This function returns the name for the winner
+    '''
     winner = max(scores)
     if winner == "player":
         winner = player_battlefield.name
@@ -194,7 +203,6 @@ def winner(computer_battlefield, player_battlefield):
     
 
 def play_game(computer_battlefield, player_battlefield):
-    
     while True:
         print(f"{player_battlefield.name}'s battlefield")
         player_battlefield.print()
