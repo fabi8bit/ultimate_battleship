@@ -52,8 +52,8 @@ def input_size(kind):
     """
 
     while True:
-        size = (input(f'Enter the size of your {kind}'
-                'small (3)= s,medium (5)= m, large (7)= l: \n'))
+        size = (input(f'Enter the size for your {kind}'
+                ' - [ small (3)= s, medium (5)= m, large (7)= l ]: \n'))
         if validate_data(size):
             break
     real_size = size_conversion(size)
@@ -247,7 +247,7 @@ def play_game(computer_battlefield, player_battlefield):
         if end_game(computer_battlefield, player_battlefield):
             break
     print('')
-    print('-'*13 + " GAME OVER " + "-"*13)
+    print('-'*14 + " GAME OVER " + "-"*15)
     print('')
     winner_name = winner(computer_battlefield, player_battlefield)
     print(f'The winner is {winner_name}')
@@ -258,13 +258,17 @@ def new_match():
     Starts a new match running all program functions
     and resetting the scores
     """
+    os.system('clear')
     scores["computer"] = 0
     scores["player"] = 0
     print(">"*20 + "<"*20)
-    print(">> Welcome to <<Ultimate Battleship>> <<")
+    print(" "*15 + "Welcome to" + " "*15)
+    print(" "*7 + "<< ULTIMATE BATTLESHIP >>" + " "*8)
+    print(" "*10 + "Fabi8bit's version" + " "*10)
     print(">"*20 + "<"*20)
     print('-'*40)
-    print('BEAR IN MIND: Top left corner is row: 0, col: 0')
+    print(" "*13 + 'BEAR IN MIND:' + " "*14)
+    print(" "*4 + 'Top left corner is row: 0, col: 0' + " "*3)
     print('-'*40)
     player = input('Enter your name: \n')
     print(">"*20 + "<"*20)
