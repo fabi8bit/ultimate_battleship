@@ -3,15 +3,18 @@ import os
 
 scores = {"computer": 0, "player": 0}
 
+
 class Battlefield:
     """
-    Main battlefield constructor. It sets the size for the battle field and the size of the fleet,
-    the name for the players, the type of player.
-    It has methods for adding ships, for guesses and for printing the battle-field
+    Main battlefield constructor. It sets the size for the battle field and
+    the size of the fleet, the name for the players, the type of player.
+    It has methods for adding ships, for guesses and for printing
+    the battle-field
     """
     def __init__(self, grid_size, fleet_size, name, type):
         self.grid_size = grid_size
-        self.battlefield = [["°" for row in range(grid_size)] for column in range(grid_size)]
+        self.battlefield = ([["°" for row in range(grid_size)]
+                            for column in range(grid_size)])
         self.fleet_size = fleet_size
         self.name = name
         self.type = type
@@ -49,7 +52,8 @@ def input_size(kind):
     """
 
     while True:
-        size = input(f'Enter the size of your {kind} (small (3)= s, medium (5)= m, large (7)= l ): \n')
+        size = (input(f'Enter the size of your {kind}'
+                'small (3)= s,medium (5)= m, large (7)= l: \n'))
         if validate_data(size):
             break
     real_size = size_conversion(size)
@@ -62,9 +66,14 @@ def validate_data(values):
     and raises ValueError if the input is different than s,m, or l
     """
     try:
-        if values.lower() not in ("s", "m", "l"):  # hint taken from this post https://stackoverflow.com/questions/22304500/multiple-or-condition-in-python
+        # this code: not in ("s", "m", "l")
+        # hint taken from this post
+        # https://stackoverflow.com/questions/22304500/
+        #   multiple-or-condition-in-python
+        if values.lower() not in ("s", "m", "l"):
             raise ValueError(
-                f"Enter only s (for small size), m (for medium size), or l (for large size)")
+                "Enter only s (for small size), m (for medium size),\
+                    or l (for large size)")
     except ValueError as e:
         print(f'Invalid data: {e}, please try again\n')
         return False
@@ -78,16 +87,18 @@ def validate_coord(x, y, player):
     """
     try:
         t = (int(x), int(y))
-        if not (all([isinstance(item, int) for item in t])): # hint taken from this post https://datascienceparichay.com/article/python-check-tuple-contains-only-numbers/
+        # this code: if not (all([isinstance(item, int) for item in t]))
+        # is a hint taken from this post
+        # https://datascienceparichay.com/article/python-check-tuple-contains-only-numbers/
+        if not (all([isinstance(item, int) for item in t])):
             raise ValueError(
                 f'enter only integer from 0 to {player.grid_size-1}')
         elif (int(x), int(y)) in player.guesses:
             raise ValueError(
-                f"You can't guess the same coordinates twice!")
-        elif int(x) > player.grid_size-1 \
-            or int(y) > player.grid_size-1:
-            raise ValueError(
-                f'enter only integer from 0 to {player.grid_size-1}')
+                "You can't guess the same coordinates twice!")
+        elif int(x) > player.grid_size-1 or int(y) > player.grid_size-1:
+            raise (ValueError(f'enter only integer'
+                              f' from 0 to {player.grid_size-1}'))
     except ValueError as e:
         if player.type == "player":
             return False
@@ -162,18 +173,45 @@ def make_guess(player):
 
 def calculate_score(result, player):
     """
-    This function gets two inputs: result (Hit or Miss), and the type of player (player or Computer)
+    This function gets two inputs: result (Hit or Miss),
+    and the type of player (player or Computer)
     and adds 1 to scores dictionary if it is a Hit
     """
     if result == "Hit":
         scores[player.type] += 1
-    
+
+
+def print_scoreboard(computer_battlefield, player_battlefield, computer_guess, player_guess):
+    if player_battlefield.guesses:
+        print('-'*40)
+        print(f'{player_battlefield.name} got a {player_guess},'
+              f' guessing {computer_battlefield.guesses[-1]}')
+        print(f'{computer_battlefield.name} got a {computer_guess},'
+              f' guessing {player_battlefield.guesses[-1]}')
+    else:
+        print('-'*40)
+        print(f'{player_battlefield.name} make your guess!')
+        print('')
+    calculate_score(player_guess, player_battlefield)
+    calculate_score(computer_guess, computer_battlefield)
+    print('-'*40)
+    print('')
+    print('-'*40)
+    print('')
+    print('-'*16 + " SCORE " + "-"*17)
+    print(f"{player_battlefield.name}: {(scores['player'])}"
+            f"  ||  {computer_battlefield.name}: {(scores['computer'])}")
+    print('-'*40)
+    print('')
+
 
 def end_game(computer_battlefield, player_battlefield):
     '''
     Returns True if one of the players hits all the ships
     '''
-    if (scores["computer"] == computer_battlefield.fleet_size) or (scores["player"] == player_battlefield.fleet_size):
+    if (
+        scores["computer"] == computer_battlefield.fleet_size) or (
+            scores["player"] == player_battlefield.fleet_size):
         return True
 
 
@@ -181,14 +219,15 @@ def winner(computer_battlefield, player_battlefield):
     '''
     Returns the name for the winner
     '''
-    winner = max(scores, key=scores.get) # Hint taken from this post https://datagy.io/python-get-dictionary-key-with-max-value/
-    
+    # Hint taken from this post
+    # https://datagy.io/python-get-dictionary-key-with-max-value/
+    winner = max(scores, key=scores.get)
     if winner == "player":
         winner = player_battlefield.name
     else:
         winner = computer_battlefield.name
     return winner
-    
+
 
 def play_game(computer_battlefield, player_battlefield):
     """
@@ -203,19 +242,8 @@ def play_game(computer_battlefield, player_battlefield):
         computer_guess = make_guess(player_battlefield)
         player_guess = make_guess(computer_battlefield)
         os.system('clear')
-        print('-'*40)
-        print(f'{player_battlefield.name} got a {player_guess}, guessing {computer_battlefield.guesses[-1]}')
-        print(f'{computer_battlefield.name} got a {computer_guess}, guessing {player_battlefield.guesses[-1]}')
-        calculate_score(player_guess, player_battlefield)
-        calculate_score(computer_guess, computer_battlefield)
-        print('-'*40)
-        print('')
-        print('-'*40)
-        print('')
-        print('-'*16 + " SCORE " + "-"*17)
-        print(f"{player_battlefield.name}: {(scores['player'])}  ||  {computer_battlefield.name}: {(scores['computer'])}")
-        print('-'*40)
-        print('')
+        (print_scoreboard(computer_battlefield, player_battlefield,
+         computer_guess, player_guess))
         if end_game(computer_battlefield, player_battlefield):
             break
     print('')
@@ -223,6 +251,7 @@ def play_game(computer_battlefield, player_battlefield):
     print('')
     winner_name = winner(computer_battlefield, player_battlefield)
     print(f'The winner is {winner_name}')
+
 
 def new_match():
     """
@@ -242,14 +271,17 @@ def new_match():
     grid_size = input_size("grid")
     fleet_size = input_size("fleet")
 
-    computer_battlefield = Battlefield(grid_size, fleet_size, "Computer", type="computer")
-    player_battlefield = Battlefield(grid_size, fleet_size, player, type="player")
+    computer_battlefield = (Battlefield(grid_size, fleet_size,
+                            "Computer", type="computer"))
+    player_battlefield = (Battlefield(grid_size, fleet_size,
+                          player, type="player"))
 
     for ship in range(fleet_size):
         ship_placement(player_battlefield)
         ship_placement(computer_battlefield)
-    
+
     os.system('clear')
+    print_scoreboard(computer_battlefield, player_battlefield, '', '')
     play_game(computer_battlefield, player_battlefield)
 
 
