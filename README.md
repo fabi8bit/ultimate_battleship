@@ -6,13 +6,6 @@ The original game is a two player strategy game and the objective is to sink all
 On this simplified version of the game the players are the users against the computer and ships occupy only one space on the grid. The placement of the ships is also automated and it happens in a total random way for both the player and the computer.
 ![Responsive Mockup](readme_assets/battleship_screenshotresponsive.png)
 
-After the login page you'll be presented to the main interface of the game. By clicking on each of the three top buttons displayed, the user will be able to decide the type of character (animal, super hero, astronauts), the type of style (friendship, war, magic), and the type of setting (Space, Nature, City) for the story. Each combination will lead to a different story and a world of fairy tales. The game is an interactive storyteller to create and read up to 27 different stories. At the moment not all stories are available. When stories are unavailable, the text "Story not available" is displayed.
-
-![Responsive Mockup](readme_assets/readme_imgs/club-bub_responsive.webp)
-
-
-
-
 ## How to play
 
 At the launch of the program the user will be presented to the welcome page where is possible to enter the player name and the size for the battlefield grid as well as the size for the fleet.
