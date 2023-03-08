@@ -22,20 +22,38 @@ class Battlefield:
         self.ships = []
 
     def print(self):
+        """
+        Class method.
+        Prints the battlefield grid adding a space between the ° symbol
+        """
         for row in self.battlefield:
             print(" ".join(row))
 
     def random_coord(self):
+        """
+        Class method.
+        Generates a random integers between 0 and the grid size.
+        It's used to generates a random column and a random row
+        """
         return randint(0, self.grid_size - 1)
 
     def add_ship(self, x, y, type):
+        """
+        Class method.
+        Adds the ships coordinates to the ships list and add @
+        symbol for the player ships
+        """
         self.ships.append((x, y))
         if self.type == "player":
             self.battlefield[x][y] = "@"
-        # elif self.type == "computer":
-        #     self.battlefield[x][y] = "#"
 
     def guess(self, x, y):
+        """
+        Class method.
+        Adds the coordinates to the guesses list and returns
+        a value of Hit if the same value is existing in the list,
+        or Miss if it doesn't
+        """
         self.guesses.append((x, y))
         self.battlefield[x][y] = "X"
         if (x, y) in self.ships:
@@ -181,7 +199,11 @@ def calculate_score(result, player):
         scores[player.type] += 1
 
 
-def print_scoreboard(computer_battlefield, player_battlefield, computer_guess, player_guess):
+def print_scoreboard(computer_battlefield, player_battlefield,
+                     computer_guess, player_guess):
+    """
+    Prints the scoreboard layout to the consolle
+    """
     if player_battlefield.guesses:
         print('-'*40)
         print(f'{player_battlefield.name} got a {player_guess},'
@@ -200,7 +222,7 @@ def print_scoreboard(computer_battlefield, player_battlefield, computer_guess, p
     print('')
     print('-'*16 + " SCORE " + "-"*17)
     print(f"{player_battlefield.name}: {(scores['player'])}"
-            f"  ||  {computer_battlefield.name}: {(scores['computer'])}")
+          f"  ||  {computer_battlefield.name}: {(scores['computer'])}")
     print('-'*40)
     print('')
 
@@ -221,12 +243,12 @@ def winner(computer_battlefield, player_battlefield):
     '''
     # Hint taken from this post
     # https://datagy.io/python-get-dictionary-key-with-max-value/
-    winner = max(scores, key=scores.get)
-    if winner == "player":
-        winner = player_battlefield.name
+    winner_check = max(scores, key=scores.get)
+    if winner_check == "player":
+        winner_check = player_battlefield.name
     else:
-        winner = computer_battlefield.name
-    return winner
+        winner_check = computer_battlefield.name
+    return winner_check
 
 
 def play_game(computer_battlefield, player_battlefield):
