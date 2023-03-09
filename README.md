@@ -39,25 +39,28 @@ At the launch of the program the screen is cleared. The guesses, the scores, and
 
 - __Random ships placement__
 
- - A function that generates random coordinates will position the ships (the computer's fleet is hidden to the user's view)
+  - A function that generates random coordinates will position the ships (the computer's fleet is hidden to the user's view)
 
 - __User input for guesses__
 
- - The users can choose the coordinates for their guesses
- - The computer guesses are randomly generated
+  - The users can choose the coordinates for their guesses
+  - The computer guesses are randomly generated
  
 ![user_guesses_input](readme_assets/consistent_interface01.png)
 ![user_guesses_input](readme_assets/consistent_interface02.png)
 
 - __Input validation__
 
- - The entered coordinates pass through a validation function that checks whether the entered data is correct. The game won't proceed until the input is correct.
- - Fleet and battlefield sizes have to be a letter among s, m, or l
- - Coordinates have to be numbers
- - The same guess cannot be entered more than once
- 
- 
+  - The entered coordinates pass through a validation function that checks whether the entered data is correct. The game won't proceed until the input is correct.
+  - Fleet and battlefield sizes have to be a letter among s, m, or l
+  - Coordinates have to be numbers
+  - The same guess cannot be entered more than once
+
 ![user_guesses_input](readme_assets/invalid_data.png)
+
+ 
+
+![user_guesses_input](readme_assets/same_coord.png)
 
 ### Features to be implemented in the future
 
