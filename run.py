@@ -6,10 +6,10 @@ scores = {"computer": 0, "player": 0}
 
 class Battlefield:
     """
-    Main battlefield constructor. It sets the size for the battle field and
-    the size of the fleet, the name for the players, the type of player.
-    It has methods for adding ships, for guesses and for printing
-    the battle-field
+    Main battlefield constructor. It sets the size of the battlefield and
+    of the fleet, and the player names and types.
+    It has methods for adding ships, for guesses, and for printing
+    the battlefield.
     """
     def __init__(self, grid_size, fleet_size, name, type):
         self.grid_size = grid_size
@@ -32,15 +32,15 @@ class Battlefield:
     def random_coord(self):
         """
         Class method.
-        Generates a random integers between 0 and the grid size.
-        It's used to generates a random column and a random row
+        Generates random integers between 0 and the grid size.
+        It's used to generate a random column and a random row
         """
         return randint(0, self.grid_size - 1)
 
     def add_ship(self, x, y, type):
         """
         Class method.
-        Adds the ships coordinates to the ships list and add @
+        Adds the ship coordinates to the ship list and adds @
         symbol for the player ships
         """
         self.ships.append((x, y))
@@ -52,7 +52,7 @@ class Battlefield:
         Class method.
         Adds the coordinates to the guesses list and returns
         a value of Hit if the same value is existing in the list,
-        or Miss if it doesn't
+        or Miss if it doesn't exist
         """
         self.guesses.append((x, y))
         self.battlefield[x][y] = "X"
@@ -64,7 +64,7 @@ class Battlefield:
 
 def input_size(kind):
     """
-    Get the user input for the size of the grid.
+    Gets the user input for the size of the grid.
     Running a while loop to ensure the data is valid.
     It will loop until the data entered is valid.
     """
@@ -80,8 +80,8 @@ def input_size(kind):
 
 def validate_data(values):
     """
-    Inside the try converts the str to small caps,
-    and raises ValueError if the input is different than s,m, or l
+    In the try the str is converted to small caps,
+    and ValueError is raised if the input is different than s,m, or l
     """
     try:
         # this code: not in ("s", "m", "l")
@@ -100,8 +100,8 @@ def validate_data(values):
 
 def validate_coord(x, y, player):
     """
-    Check if the coordinates are numeric and if are in the correct range,
-    and if it is enterd twice
+    Check whether coordinates are numeric and in the correct range,
+    and whether they are entered twice
     """
     try:
         t = (int(x), int(y))
@@ -127,7 +127,7 @@ def validate_coord(x, y, player):
 
 def check_new_coord():
     """
-    Check if the coordinate was already choosen
+    Check if the coordinate was already chosen
     """
 
 
@@ -157,10 +157,10 @@ def x_y_gen(battlefield):
 
 def ship_placement(battlefield):
     """
-    This function unpack the coordinates coming from
+    This function unpacks the coordinates coming from
     x_y_gen function
-    At the end calls the add_ship class function that adds
-    the coordinates to the ships list of the class
+    In the end, the add_ship class function is called. This function adds
+    coordinates to the ships list of the class
     """
     while True:
         x, y = x_y_gen(battlefield)
@@ -171,9 +171,9 @@ def ship_placement(battlefield):
 
 def make_guess(player):
     """
-    This function check if the player is the computer or the user.
-    If it's the computer call the random coordinates generator.
-    If it's the user asks to input the coordinates. It will proceed to
+    This function checks if the player is the computer or the user.
+    If it's the computer, it calls the random coordinates generator.
+    If it's the user, it asks to enter the coordinates. It will proceed to
     validate_coord to validate the input
     """
     while True:
@@ -192,7 +192,7 @@ def make_guess(player):
 def calculate_score(result, player):
     """
     This function gets two inputs: result (Hit or Miss),
-    and the type of player (player or Computer)
+    and the type of player (player or Computer),
     and adds 1 to scores dictionary if it is a Hit
     """
     if result == "Hit":
@@ -239,7 +239,7 @@ def end_game(computer_battlefield, player_battlefield):
 
 def winner(computer_battlefield, player_battlefield):
     '''
-    Returns the name for the winner
+    Returns the name of the winner
     '''
     # Hint taken from this post
     # https://datagy.io/python-get-dictionary-key-with-max-value/
@@ -253,8 +253,8 @@ def winner(computer_battlefield, player_battlefield):
 
 def play_game(computer_battlefield, player_battlefield):
     """
-    Main loop of the program. It keeps the loop on until the player's score
-    or computer's score reach the number of ships deployed in the battlefield
+    Main loop of the program. It keeps the loop on until either player score
+    or computer score reach the number of ships deployed in the battlefield
     """
     while True:
         print(f"{player_battlefield.name}'s battlefield")
