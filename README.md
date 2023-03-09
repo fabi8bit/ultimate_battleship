@@ -9,7 +9,7 @@ In this simplified version of the game, the user and the computer are the two pl
 ## How to play
 
 At the launch of the program, the user will find a welcome page, where they will be able to enter the player name, choose the size of the battlefield grid, and the size of the fleet.
-The grid is composed by a sequence of "°" symbols, and the user's ships are indicated by an "@" symbol. Of course the computer board is presented as an empty grid. A missed shot will be marked on the board with the "X" symbol on the corresponding coordinate, while a hit will be displayed as' * 'symbol.
+The grid is composed by a sequence of "°" symbols, and the user's ships are indicated by an "@" symbol. Of course the computer board is presented as an empty grid. A missed shot will be marked on the board with the "X" symbol on the corresponding coordinate, while a hit will be displayed as "*" symbol.
 The user will input the coordinates for their shots, while the coordinates for the computer are generated randomly.
 The winner is the one who sinks the opponent ships first.
 
@@ -78,7 +78,7 @@ At the launch of the program the screen is cleared. The guesses, the scores, and
  - The random ship placement method will be invoked at this point for both players and passed through a validation function to ensure that the coordinates are unique and within battlefield grid size. The right coordinates returned by the function are added to the relative player's coordinates list in the instantiated Class.
  - The battlefield grid will be printed in the console. The ships are displayed only in the player's grid.
  - The user is prompted to the guess part. The input for Row and Column is asked sequentially, and verified.
- - The consolle will be cleared again at this point, and the scoreboard and the updated grid will be printed to the consolle in the same spot, giving the impression that the interface is updating live. The Hit and Miss shots are reppresented with an " * " or "X" respectively, on both grids.
+ - The consolle will be cleared again at this point, and the scoreboard and the updated grid will be printed to the consolle in the same spot, giving the impression that the interface is updating live. The Hit and Miss shots are reppresented with an "*" or "X" respectively, on both grids.
  - The guesses list is updated on both instances of Class Battlefield
  - The loop keeps going until one of the two scores reaches the size of the fleet, which means there are no more ships to sink. The loop will break.
  - The winner function is invoked. After a simple score check, the winner's name will be returned by this function.
