@@ -74,8 +74,34 @@ def input_size(kind):
                 ' - [ small (3)= s, medium (5)= m, large (7)= l ]: \n'))
         if validate_data(size):
             break
-    real_size = size_conversion(size)
+    real_size = size_conversion(size.lower())
     return real_size
+
+
+def display_instr():
+    while True:
+        answer = input('Display instruction (y/n) ?\n')
+        if answer.lower() == 'y':
+            print("""
+Insert your name, the size of your battlefield grid and fleet.
+The grid is composed by a sequence of '°' symbols, and
+the user's ships are indicated by an "@" symbol. Of course the computer
+board is presented as an empty grid.
+The user will input the coordinates for their shots,
+while the coordinates for the computer are generated randomly.
+The coordinates for the top left corner are row: 0, col: 0.
+A missed shot will be marked on the board with the "X" symbol
+on the corresponding coordinate,
+while a hit will be displayed as "*" symbol.
+The winner is the one who sinks the opponent ships first.""")
+            print('')
+            print('-'*40)
+            input("Press Enter to continue...")
+            break
+        elif answer.lower() == 'n':
+            break
+        else:
+            print('Please type only y or n')
 
 
 def validate_data(values):
@@ -251,6 +277,19 @@ def winner(computer_battlefield, player_battlefield):
     return winner_check
 
 
+def enter_name():
+    while True:
+        name = input('Enter your name: \n')[:15]
+        if name.isspace():
+            print('Please enter at least one letter/number, not only spaces')
+        elif not name:
+            print('Please enter at least one letter')
+        elif name:
+            return name
+            break
+        
+
+
 def play_game(computer_battlefield, player_battlefield):
     """
     Main loop of the program. It keeps the loop on until either player score
@@ -288,11 +327,12 @@ def new_match():
     print(" "*7 + "<< ULTIMATE BATTLESHIP >>" + " "*8)
     print(" "*10 + "Fabi8bit's version" + " "*10)
     print(">"*20 + "<"*20)
+    instruction = display_instr()
     print('-'*40)
     print(" "*13 + 'BEAR IN MIND:' + " "*14)
     print(" "*4 + 'Top left corner is row: 0, col: 0' + " "*3)
     print('-'*40)
-    player = input('Enter your name: \n')
+    player = enter_name()
     print(">"*20 + "<"*20)
     grid_size = input_size("grid")
     fleet_size = input_size("fleet")
