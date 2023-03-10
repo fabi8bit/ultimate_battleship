@@ -89,8 +89,26 @@ At the launch of the program the screen is cleared. The guesses, the scores, and
 
 ## Testing
  - The code was passed through the Code Institute PEP8 linter without any issues.
- - Invalid inputs are rejected by the evaluation data processes.
- - The program works without any issues on the local terminal as well on the Heroku mock terminal.
+
+- Invalid inputs are rejected by the evaluation data processes:
+
+  | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+  | --- | --- | --- | --- | --- |
+  | Display Instructions y/n | The instruction will be printed to the consolle if yes or proceed to the game if no | Insert y or n respectively | As expected | Pass |
+  | Display Instructions y/n | The instruction will be printed to the consolle if yes or proceed to the game if no | Insert capitol Y or N | The input is transformed to lower case and acting as it's y or n | Pass |
+  | Display Instructions y/n | The instruction will be printed to the consolle if yes or proceed to the game if no | Enter different characters than y or n | The user is prompted to only enter y or n | Pass |
+  | Enter Name | The input is validated and proceed to the next step if correct | Enter correct name | As expected | Pass |
+  | Enter Name | The input is validated and proceed to the next step if correct | No input | The user is prompted to enter at least one character | Pass |
+  | Enter Name | The input is validated and proceed to the next step if correct | Enter only a space | The user is prompted to enter at least one character, not only spaces | Pass |
+  | Enter the size of the grid and the fleet | The input is validated and proceed to the next step if correct | Enter correct values (s,m,l) | As expected | Pass |
+  | Enter the size of the grid and the fleet | The input is validated and proceed to the next step if correct | Enter capitol values (S,M,L) | The input is transformed to lower case and acting as it's s or m or l | Pass |
+  | Enter the size of the grid and the fleet | The input is validated and proceed to the next step if correct | Enter values different than s,m,l | Value Error is raised. The user is prompted to only enter s, m, or l values | Pass |
+  | Enter rows and columns for coordinates | The input is validated and proceed to the next step if correct | Enter correct values between 0 and the size of the grid-1 | As expected | Pass |
+  | Enter rows and columns for coordinates | The input is validated and proceed to the next step if correct | Enter values out of range | Value Error is raised. The user is prompted to only enter values in the range 0 to size of grid -1 | Pass |
+  | Enter rows and columns for coordinates | The input is validated and proceed to the next step if correct | Enter values twice | Value Error is raised. The user is prompted to not enter values the coordinates twice | Pass |
+
+- A complete match was run for every size settings without issues
+- The program works without any issues on the local terminal as well on the Heroku mock terminal.
 
 ## Deployment steps
  - Clone or fork this repository

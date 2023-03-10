@@ -117,9 +117,11 @@ def validate_data(values):
         if values.lower() not in ("s", "m", "l"):
             raise ValueError(
                 "Enter only s (for small size), m (for medium size),\
-                    or l (for large size)")
+ or l (for large size)")
     except ValueError as e:
-        print(f'Invalid data: {e}, please try again\n')
+        print(f'Invalid data:\n'
+              f'{e},\n'
+              'please try again\n')
         return False
     return True
 
@@ -146,7 +148,7 @@ def validate_coord(x, y, player):
     except ValueError as e:
         if player.type == "player":
             return False
-        print(f'Invalid data: {e}, please try again\n')
+        print(f'Invalid data:\n{e},\nplease try again\n')
         return False
     return True
 
@@ -283,11 +285,10 @@ def enter_name():
         if name.isspace():
             print('Please enter at least one letter/number, not only spaces')
         elif not name:
-            print('Please enter at least one letter')
+            print('Please enter at least one letter/number')
         elif name:
             return name
             break
-        
 
 
 def play_game(computer_battlefield, player_battlefield):
