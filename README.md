@@ -4,7 +4,9 @@ Ultimate Battleship Fabi8bit's version is a terminal game developed in Python an
 The game runs on the Code Institute mock terminal on the Heroku platform. Here is the direct link to play the [game](https://ultimate-battleship-fabi8s-ver.herokuapp.com/) on the mock terminal: [Ultimate Battleship Fabi8bit's version](https://ultimate-battleship-fabi8s-ver.herokuapp.com/)
 The original game is a two-player strategy game, and the objective is to sink all of the opponent ships before the opponent sinks yours. It's typically played on a square grid of varying dimensions, where the player can place the ships.
 In this simplified version of the game, the user and the computer are the two players, and ships occupy only one space on the grid. The placement of the ships is also automated and it happens in a totally random way for both the player and the computer.
-![Responsive Mockup](readme_assets/battleship_screenshotresponsive.png)
+
+## Flowchart
+![ultimate_batlleship_flowchart](readme_assets/ultimate_battleship_flowchart.png)
 
 ## How to play
 
