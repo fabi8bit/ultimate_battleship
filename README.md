@@ -10,7 +10,7 @@ In this simplified version of the game, the user and the computer are the two pl
 
 ## How to play
 
-At the launch of the program, the user will find a welcome page, where they will be able to enter the player name, choose the size of the battlefield grid, and the size of the fleet.
+At the launch of the program, the user will find a welcome page. There will be a prompt to see game instructions. The user will have to choose yes or no. If the user enters y to choose yes, instructions will pop up. To proceed to the game user must press enter. If the user choses no the game will be launched. Now the user will be able to enter the player name, choose the size of the battlefield grid, and the size of the fleet.
 The grid is composed by a sequence of "°" symbols, and the user's ships are indicated by an "@" symbol. Of course the computer board is presented as an empty grid. A missed shot will be marked on the board with the "X" symbol on the corresponding coordinate, while a hit will be displayed as "*" symbol.
 The user will input the coordinates for their shots, while the coordinates for the computer are generated randomly.
 The winner is the one who sinks the opponent ships first.
@@ -119,7 +119,7 @@ At the launch of the program the screen is cleared. The guesses, the scores, and
  - Add the buildpacks in this order: Python, Node JS
  - Link the Heroku app to this repository under the Deploy tab
  - Under the Manual deploy section select the main branch and click on Deploy Branch
- - When building is complete, click on View to open the mock terminal
+ - When build is complete, click on View to open the mock terminal
 
 ## Credits
  -  this code: " not in ("s", "m", "l") " under the validate_data function
