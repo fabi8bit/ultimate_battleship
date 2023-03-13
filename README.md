@@ -10,7 +10,7 @@ In this simplified version of the game, the user and the computer are the two pl
 
 ## How to play
 
-At the launch of the program, the user will find a welcome page. There will be a prompt to see game instructions. The user will have to choose yes or no. If the user enters y to choose yes, instructions will pop up. To proceed to the game user must press enter. If the user choses no the game will be launched. Now the user will be able to enter the player name, choose the size of the battlefield grid, and the size of the fleet.
+At the launch of the program, the user will find a welcome page. There will be a prompt to see game instructions. The user will have to choose "yes" or "no". If the user enters "y" to choose yes, instructions will pop up. To proceed to the game user must press enter. If the user choses "no" the game will be launched. Now the user will be able to enter the player name, choose the size of the battlefield grid, and the size of the fleet.
 The grid is composed by a sequence of "°" symbols, and the user's ships are indicated by an "@" symbol. Of course the computer board is presented as an empty grid. A missed shot will be marked on the board with the "X" symbol on the corresponding coordinate, while a hit will be displayed as "*" symbol.
 The user will input the coordinates for their shots, while the coordinates for the computer are generated randomly.
 The winner is the one who sinks the opponent ships first.
@@ -75,8 +75,9 @@ At the launch of the program the screen is cleared. The guesses, the scores, and
 ## Data model and data flow
  For the data model I was entirely inspired by the one used in the Ultimate Battleship example presented during the course. I changed the names of the classes and functions, and figured out what would be the best way for data flow.
  I tried to keep all the functions "atomic" as suggested during the course.
- The data flow goes as follows:
- - The screen will be cleared and a welcome message as well as a hint are displayed.
+ The data flow goes as follows as you can also check in the simplified [flowchart](readme_assets/ultimate_battleship_flowchart.png):
+ - The screen will be cleared and a welcome message is displayed.
+ - The User will be asked if wants to display the game instructions.
  - The User will be asked to type the name, and this value will be assigned as the name for the player when the Battllefield class is instantiated.
  - The User will be asked to insert the desired size for the battlefield grid and fleet. This value will be passed for the instance creation.
  - The computer and the player instances will be created: The Battlefield class stores grid size, fleet size, name, type (this value will be used for if statements inside the functions), opponent guesses, ships coordinates. The class also has methods like the grid print, random coordinates generator, ships coordinates list creator, opponent guess list creator.
